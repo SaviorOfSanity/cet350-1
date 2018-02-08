@@ -261,8 +261,8 @@ public class Program2 {
 	//backups the file and renames it as a backup
 	public static void backupFile(String fileName) throws IOException{
 		BufferedReader inFile = new BufferedReader(new FileReader(fileName));  //bufferedreader of the file that will be backed up
-		String backup = fileName + "-backup.txt";  //adds -backup.txt to the old file
-		PrintWriter outFile = new PrintWriter(new FileWriter(backup));
+		String backupFilename = fileName + "-backup.txt";  //adds -backup.txt to the old file
+		PrintWriter outFile = new PrintWriter(new FileWriter(backupFilename));		//open the "backup" to write to.
 		String inBuffer = inFile.readLine();  //Read first line
 		while(inBuffer != null){  //backs up file by writing it to other file
 			outFile.println(inBuffer); //print current line to file
