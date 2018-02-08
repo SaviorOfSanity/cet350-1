@@ -1,0 +1,24 @@
+Word: hello
+Count: 2
+Word: adfffa
+Count: 1
+Word: adsfdsff
+Count: 1
+Word: dafsdfsfd
+Count: 1
+Word: lajsdfjlasdjf
+Count: 1
+Word: asdfafdsf
+Count: 1
+Word: asdfafsdf
+Count: 1
+Word: 34343fasfasdf
+Count: 1
+Word: sfggsgsdfg
+Count: 1
+Word: fgsdfgdfgsd
+Count: 1
+
+
+Total Amount of Unique Words: 10
+Sum is: 2762145

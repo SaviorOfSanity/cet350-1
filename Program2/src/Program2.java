@@ -11,6 +11,7 @@ moo6486@calu.edu
 Program2.java
 */
 
+import javax.lang.model.type.PrimitiveType;
 import java.io.*;
 import java.util.*;
 
@@ -56,21 +57,21 @@ public class Program2 {
 				
         }
 		else if (args.length == 1) {  //1 command line argument, input file name
-			inputFileName = args[0];
-			System.out.println("Please enter an output file name: ");
+			inputFileName = args[0];		//save the input filename
+			System.out.println("Please enter an output file name: "); //ask user for output filename
 			outputFileName = stdin.readLine();
-			if (outputFileName.length() == 0) {
+			if (outputFileName.length() == 0) {			//if user enters nothing, quit the program
 				ok = false;
 				found = true;
 			}
 			choice = menu(outputFileName, stdin, found, ok);
-			if (choice.equals("quit")){
+			if (choice.equals("quit")){				//check if the outputFilename exists
 				ok = false;
 				found = true;
 			}
-			else if (choice.equals("1")){
+			else if (choice.equals("1")){			//if it does, reprompt
 				outputFileName = stdin.readLine();
-				if (outputFileName.length() == 0) {
+				if (outputFileName.length() == 0) {	//quit if nothing is entered
 				ok = false;
 				found = true;
 				}
@@ -78,26 +79,27 @@ public class Program2 {
 		}
 		else //no file names supplied
 		{
-			System.out.println("Please enter an input file name: ");  //asks user to give a input file name because no were provided
+			System.out.println("Please enter an input file name: ");  //asks user to give a input file name because none were provided
 			inputFileName = stdin.readLine();
-				if (inputFileName.length() == 0) {
+				if (inputFileName.length() == 0) { //if nothing was entered for inputFilename, quit
 				ok = false;
 				found = true;
 				}else {
-					System.out.println("Please enter an output file name: ");
+					System.out.println("Please enter an output file name: "); //if inputFilename was entered, ask for outputFilename
 					outputFileName = stdin.readLine();
-					if (outputFileName.length() == 0) {
+					if (outputFileName.length() == 0) {		//if nothing is entered, quit
 						ok = false;
 						found = true;
 					}
-					choice = menu(outputFileName, stdin, found, ok);
-					if (choice.equals("quit")){
+					choice = menu(outputFileName, stdin, found, ok);		//check to see if entered filename exists
+					if (choice.equals("quit")){		//quit if nothing is entered in method call
 						ok = false;
 						found = true;
 					}
 					else if (choice.equals("1")){
+						System.out.println("Please enter a new file name: ");
 						outputFileName = stdin.readLine();
-						if (outputFileName.length() == 0) {
+						if (outputFileName.length() == 0) {		//if nothing was entered, quit
 						ok = false;
 						found = true;
 						}
@@ -259,16 +261,16 @@ public class Program2 {
 	
 	//backups the file and renames it as a backup
 	public static void backupFile(String fileName) throws IOException{
-		BufferedReader oldFile = new BufferedReader(new FileReader(fileName));  //bufferedreader of the file that will be backed up
+		BufferedReader inFile = new BufferedReader(new FileReader(fileName));  //bufferedreader of the file that will be backed up
 		String backup = fileName + "-backup.txt";  //adds -backup.txt to the old file
-		String inBuffer = oldFile.readLine();  //Reads next line
+		PrintWriter outFile = new PrintWriter(new FileWriter(backup));
+		String inBuffer = inFile.readLine();  //Read first line
 		while(inBuffer != null){  //backs up file by writing it to other file
-			PrintWriter outFile = new PrintWriter(new FileWriter(backup));
-			inBuffer = oldFile.readLine();  //Reads next line
-			outFile.println(inBuffer);
+			outFile.println(inBuffer); //print current line to file
+			inBuffer = inFile.readLine(); //get next line
 		}
-		oldFile.close();
-		
+		inFile.close();
+		outFile.close();
 	}
 	
 	public static String menu(String outputFileName, BufferedReader stdin, boolean found, boolean ok) throws IOException {
