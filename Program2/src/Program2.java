@@ -1,4 +1,3 @@
-
 /*
 Andrew Siddall
 Nick Cavalancia
@@ -9,7 +8,7 @@ Group Number: 5
 sid1134@calu.edu
 cav9904@calu.edu
 moo6486@calu.edu
-Average.java
+Program2.java
 */
 
 import java.io.*;
@@ -20,11 +19,7 @@ public class Program2 {
         //variable declaration
         int count = 0, sum = 0;
         boolean ok = true;
-
         String word = null;  									//single parsed word
-
-        String word = null;                     				//single parsed word
-
         String inBuffer = null;                 				//string to hold buffered data
         String inputFileName = null;            				//to store input filename
         String outputFileName = null;           				//to store output filename
@@ -32,7 +27,6 @@ public class Program2 {
         int arraySize = 100;									//max number of words
         Word[] words = new Word[arraySize];     				//array of "words"
         BufferedReader inFile;                  				//to read in from the file
-
        // PrintWriter outFile;                    				//to print to the file
 		boolean found = false;
 		String choice = "";
@@ -42,18 +36,10 @@ public class Program2 {
 		
 
 		
-
-        PrintWriter outFile;                    				//to print to the file
-
-        //for keyboard input
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-
         //check to see if any command line arguments were entered and save them
         if (args.length > 1) {
             inputFileName = args[0];
             outputFileName = args[1];
-
 			//If output file is found presents user with a menu
 			choice = menu(outputFileName, stdin, found, ok);  //funtion returns choice
 			if (choice.equals("quit")){
@@ -186,56 +172,6 @@ public class Program2 {
 			
 		}
 		
-
-			try {		//try opening the files
-			
-			}
-			catch {		//error opening files
-			
-			}
-        }
-		else if (args.length == 1) {
-			inputFileName = args[0];
-			System.out.println("Please enter an output file name: ");
-			outputFileName = stdin.readLine();
-			if (outputFileName == null) {
-				ok = false;
-			}
-		}
-		
-		//at this point there are two file names, try their validity
-		if (ok) {
-			String tempString = "hello lkjasdlkjf hello waerwer asskjldflks hello alksdfkj 1 2";
-			StringTokenizer newLine = new StringTokenizer(tempString, delims);
-
-			while (newLine.hasMoreTokens()) {
-				word = newLine.nextToken().toLowerCase();
-				boolean worked = isInt(word);
-				if (worked) {
-					sum+=Integer.parseInt(word);
-					System.out.println("Sum increased to: " + sum);
-				}
-				else {
-					int index = findWord(words, word, count);
-					if (index >= 0) {
-						words[index].addOne();
-						System.out.println("Word found: " + words[index].getWord());
-						System.out.println(words[index].getCount());
-					}
-					else if (index == -1 && count < arraySize ) {
-						words[count] = new Word(word);
-						System.out.println("Word added: " + words[count].getWord());
-						count++;
-						System.out.println("Total count: " + count);
-					}
-				}
-			}
-
-			for (int i = 0; i < count; i++) {
-				System.out.println(words[i].getWord() + "count: " + words[i].getCount());
-			}
-		}
-
     } //end of main
 
     //BEGIN isInt
@@ -262,7 +198,6 @@ public class Program2 {
         }
         return index;
     }//END findWords
-
 	
 	//BEGIN writeToFile
 	public static void writeToFile(Word words[], int count, String outputFileName, int sum, String choice){
@@ -368,7 +303,6 @@ public class Program2 {
 		}
 		return choice;
 	}
-
 
 } //end of class Program2
 
