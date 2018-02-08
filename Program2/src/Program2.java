@@ -11,7 +11,6 @@ moo6486@calu.edu
 Program2.java
 */
 
-import javax.lang.model.type.PrimitiveType;
 import java.io.*;
 import java.util.*;
 
