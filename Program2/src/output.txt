@@ -19,14 +19,18 @@ Count: 1
 Word: fgsdfgdfgsd
 Count: 1
 Word: mike
-Count: 2
+Count: 1
 Word: john
 Count: 1
 Word: steve
 Count: 1
 Word: billy
 Count: 2
+Word: mike6474732
+Count: 1
+Word: lkjsdkjfj
+Count: 1
 
 
-Total Amount of Unique Words: 14
-Sum is: 2762145
+Total Amount of Unique Words: 16
+Sum is: 37104487
