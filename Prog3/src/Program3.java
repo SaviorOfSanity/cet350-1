@@ -19,8 +19,6 @@ public class Program3 extends Frame implements WindowListener{
         lm.columnWidths = colWidth;
         lm.rowHeights = rowHeight;
         c.anchor = GridBagConstraints.EAST;
-        this.setBounds(20,20,600,600);
-        this.setSize(600,500);
         this.setLayout(lm);
 
         c.weightx = 1.0;
@@ -36,12 +34,14 @@ public class Program3 extends Frame implements WindowListener{
         this.setResizable(true);
         this.setVisible(true);
         this.addWindowListener(this);
+        this.setTitle("My window");
         this.pack();
 
     } //end of constructor
 
     public static void main (String[] args) {
-        new Program3();
+        Program3 window = new Program3();
+        window.setBounds(20,20,600,600);
     }
 
     public void stop () {
@@ -50,6 +50,7 @@ public class Program3 extends Frame implements WindowListener{
     }
 
     public void windowClosing (WindowEvent e) {
+        System.out.println("Program exited");
         stop();
     }
 
@@ -66,15 +67,15 @@ public class Program3 extends Frame implements WindowListener{
     }
 
     public void windowDeactivated (WindowEvent e) {
-
+        
     }
 
     public void windowIconified (WindowEvent e) {
-
+        System.out.println("Window minimized");
     }
 
     public void windowDeiconified (WindowEvent e) {
-
+        System.out.println("Window maximized");
     }
 
 }
