@@ -29,6 +29,10 @@ public class Program3
     //to keep our current directory
 	File curDir;
 
+	//strings to store our files when selected
+    String sourceFile;
+    String targetFile;
+
 	public Program3 (File f) {
 	    //set the current directory to the one passed by main function
 	    curDir = f;
@@ -135,7 +139,7 @@ public class Program3
         lm.setConstraints(okBtn, c);
         this.add(okBtn);
         okBtn.addActionListener(this);
-        okBtn.setEnabled(false);        //initially not working
+        okBtn.setEnabled(false);        //enabled for mode 2
 
         //add target button
         c.weightx = 1.0;
@@ -148,7 +152,7 @@ public class Program3
         lm.setConstraints(tgtBtn, c);
         this.add(tgtBtn);
         tgtBtn.addActionListener(this);
-        tgtBtn.setEnabled(false);       //initially not working
+        tgtBtn.setEnabled(false);       //enabled in mode 1
 
         //add target filename field
         c.weightx = 1.0;
@@ -161,8 +165,9 @@ public class Program3
         lm.setConstraints(tgtFileName, c);
         Color clr = Color.white;
         tgtFileName.setBackground(clr);
+        tgtFileName.addActionListener(this);
         this.add(tgtFileName);
-        tgtFileName.setEnabled(false);  //initially not working
+        tgtFileName.setEnabled(false);  //enabled in mode 1
 		
 		this.setLayout(lm);
   		
@@ -192,7 +197,7 @@ public class Program3
         }
 
         Program3 window = new Program3(f);
-        window.setBounds(20,20,600,300);
+        window.setBounds(20,20,600,350);
     }
 
     public void display(String name) {  //name is the item in the directoryList that is "picked"
@@ -207,7 +212,10 @@ public class Program3
                         if (f.isDirectory()) {  //check if it is a directory
                             curDir = new File(curDir, name);    //set the current directory to the directory clicked
                         } else if (f.isFile()) {  //check if it is a file
+                            sourceFile = f.getAbsolutePath();       //store the path
+                            sysMsgLabel.setText("Source file selected: " + sourceFile);
                             srcFileLabel.setText(curDir.getAbsolutePath() + "\\" + name);   //set the srcFileLabel to the filename selected
+                            tgtBtn.setEnabled(true);        //turn target button on, because valid file was selected
                         }
                     }
                 }
@@ -243,6 +251,7 @@ public class Program3
                 * set the target field if valid file dir/file is selected
                 * can input in to file name field to create a "new" file
                 * ok button or enter enters mode 2*/
+                System.out.println("Target mode has been entered.");
                 break;
             case 2: //copy mode
                 /*needs valid input/output files
@@ -303,8 +312,11 @@ public class Program3
 			//might have to remove the +
 			System.out.println(item + " is selected");
 			display(item);
-
 		}
+		else if (s == tgtBtn) {
+            System.out.println("Target Mode entered!");
+            mode = 1;
+        }
 	}
 }
 	
