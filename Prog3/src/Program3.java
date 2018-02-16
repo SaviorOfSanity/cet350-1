@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.*;
 
-//fix upstream
+
 public class Program3
     extends Frame
     implements WindowListener, ActionListener{
@@ -169,7 +169,7 @@ public class Program3
         this.setResizable(true);
         this.setVisible(true);
         this.addWindowListener(this);
-		this.setTitle("My window");
+        this.setSize(400,600);
 		
 		
         this.pack();
@@ -185,15 +185,15 @@ public class Program3
 	    if (args.length > 0) {
 	        //if yes, use the first arg as the directory
             f = new File(args[0]);
+            if (f.exists()) {
+                Program3 window = new Program3(f);
+            }
         }
         else { //otherwise use the current directory
             f = new File("");
             String s = f.getAbsolutePath();
             f = new File(s);
         }
-
-        Program3 window = new Program3(f);
-        window.setBounds(20,20,400,300);
     }
 
     public void display(String name) {  //name is the item in the directoryList that is "picked"
