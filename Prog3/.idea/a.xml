@@ -15,7 +15,6 @@
       <file leaf-file-name="Program3.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Program3.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="1173">
               <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
@@ -24,12 +23,10 @@
                 <element signature="e#1867#1868#0" expanded="true" />
                 <element signature="e#1920#1921#0" expanded="true" />
                 <element signature="e#1974#1975#0" expanded="true" />
-=======
             <state relative-caret-position="-2923">
               <caret line="70" column="41" lean-forward="true" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
->>>>>>> 541baa12d1b04178786a6fdc5f22068513d2b87e
               </folding>
             </state>
           </provider>
