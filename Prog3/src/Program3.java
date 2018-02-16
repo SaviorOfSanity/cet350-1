@@ -67,7 +67,7 @@ public class Program3 extends Frame implements WindowListener{
     }
 
     public void windowDeactivated (WindowEvent e) {
-        
+
     }
 
     public void windowIconified (WindowEvent e) {
