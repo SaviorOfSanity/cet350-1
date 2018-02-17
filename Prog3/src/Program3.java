@@ -4,36 +4,37 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.*;
 
-
 public class Program3
     extends Frame
     implements WindowListener, ActionListener{
 
+
     //lists
-    List directoryList = new List(13);
+    private List directoryList = new List(13);
     //labels
-    Label srcLabel = new Label("Source:");
-    Label fileLabel = new Label("File Name:");
-    Label srcFileLabel = new Label();
-    Label tgtDirLabel = new Label();
-    Label sysMsgLabel = new Label();
+    private Label srcLabel = new Label("Source:");
+    private Label fileLabel = new Label("File Name:");
+    private Label srcFileLabel = new Label();
+    private Label tgtDirLabel = new Label();
+    private Label sysMsgLabel = new Label();
     //buttons
-    Button okBtn = new Button("Ok");
-    Button tgtBtn = new Button("Target");
+    private Button okBtn = new Button("Ok");
+    private Button tgtBtn = new Button("Target");
     //text fields
-    TextField tgtFileName = new TextField("Text field........",60);
+    private TextField tgtFileName = new TextField("Text field........",60);
 
     //for different modes in "display" switch case
-    int mode = 0;   //0 - source, 1 - target, 2 - copy
+    private int mode = 0;   //0 - source, 1 - target, 2 - copy
 
     //to keep our current directory
-	File curDir;
+    private File curDir;
 
-	//strings to store our files when selected
-    String sourceFile;
-    String targetFile;
+    //strings to store our files when selected
+    private String sourceFile;
+    private String targetFile;
 
 	public Program3 (File f) {
+
 	    //set the current directory to the one passed by main function
 	    curDir = f;
 
@@ -200,7 +201,7 @@ public class Program3
         window.setBounds(20,20,600,350);
     }
 
-    public void display(String name) {  //name is the item in the directoryList that is "picked"
+    private void display(String name) {  //name is the item in the directoryList that is "picked"
         switch (mode) {
             case 0:     //source mode
                 if (name != null) {
@@ -267,7 +268,7 @@ public class Program3
 
     }
 
-    public void stop () {
+    private void stop () {
         this.removeWindowListener(this);
         this.dispose();
     }
