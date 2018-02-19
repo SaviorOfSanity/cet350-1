@@ -32,6 +32,9 @@ public class Program3
     //strings to store our files when selected
     private String sourceFile;
     private String targetFile;
+	
+	//General Variables
+	String Filename;
 
 	public Program3 (File f) {
 
@@ -178,8 +181,13 @@ public class Program3
 		
 		
         this.pack();
-
+		
+		try{
 		display(null);
+		} catch( IOException e){
+			System.out.println(e);
+		}
+		
 
     } //end of constructor
 
@@ -201,7 +209,7 @@ public class Program3
         window.setBounds(20,20,600,350);
     }
 
-    private void display(String name) {  //name is the item in the directoryList that is "picked"
+    private void display(String name) throws FileNotFoundException, IOException {  //name is the item in the directoryList that is "picked"
         switch (mode) {
             case 0:     //source mode
                 if (name != null) {
@@ -253,12 +261,69 @@ public class Program3
                 * can input in to file name field to create a "new" file
                 * ok button or enter enters mode 2*/
                 System.out.println("Target mode has been entered.");
+				
+				if (name != null) {
+                    if (name.equals("..")) {    //go to parent directory if it exists
+                        curDir = new File(curDir.getParent());
+                        System.out.println("curDir.getParent() = " + curDir.getParent());
+                    } else {      //otherwise it is a file or child directory
+                        File f = new File(curDir, name);
+                        if (f.isDirectory()) {  //check if it is a directory
+                            curDir = new File(curDir, name);    //set the current directory to the directory clicked
+                        } else if (f.isFile()) {  //check if it is a file
+                            targetFile = f.getAbsolutePath();       //store the path
+                            sysMsgLabel.setText("Target file selected: " + targetFile);
+                            tgtDirLabel.setText(curDir.getAbsolutePath());   //set the tgtDirLabel to the filename selected  **NEEDS TO CHANGE WHEN ENTERING PARENT
+							tgtFileName.setEnabled(true);  //***NEEDS TO DISABLE WHEN FILE NAME IS DELETED
+							tgtFileName.setText(name);
+                            okBtn.setEnabled(true);        //turn target button on, because valid file was selected
+                        }
+                    }
+                }
+
+                //update the fileDirectoryList
+               // String[] fileNames;
+                fileNames = curDir.list();
+
+
+                //set the title of the window
+                if (fileNames == null) {
+                    fileNames = new String[]{};
+                } else {
+                    this.setTitle(curDir.getAbsolutePath());
+                }
+
+                //clear the list
+                directoryList.removeAll();
+
+                //check if a parent directory exists
+                if (curDir.getParent() != null) {
+                    directoryList.add("..");    //add the change to parent directory indicator
+                }
+
+                //populate the list with files/directories
+                for (int i = 0; i < fileNames.length; i++) {
+                    directoryList.add(fileNames[i]);
+                }
                 break;
             case 2: //copy mode
                 /*needs valid input/output files
                 * may overwrite existing file
                 * if dir is changed, creates file with
                 * previously selected name in the new dir*/
+				
+				BufferedReader inFile = new BufferedReader(new FileReader(sourceFile));  //bufferedreader of the file that will be backed up
+				String backupFilename = targetFile;  //adds -backup.txt to the old file
+				PrintWriter outFile = new PrintWriter(new FileWriter(backupFilename));		//open the "backup" to write to.
+				String inBuffer = inFile.readLine();  //Read first line
+				while(inBuffer != null){  //backs up file by writing it to other file
+					outFile.println(inBuffer); //print current line to file
+					inBuffer = inFile.readLine(); //get next line
+				}
+				inFile.close();
+				outFile.close();
+
+				
                 break;
 
 
@@ -312,13 +377,21 @@ public class Program3
 			String item = directoryList.getSelectedItem();
 			//might have to remove the +
 			System.out.println(item + " is selected");
-			display(item);
+			//display(item);
+			try{
+				display(item);
+			} catch( IOException er){
+				System.out.println(er);
+			}
 		}
 		else if (s == tgtBtn) {
             System.out.println("Target Mode entered!");
             mode = 1;
         }
+		else if (s == okBtn) 
+		{
+			//filename = curDir.getAbsolutePath() + "\\" + name
+			mode = 2;
+		}
 	}
 }
-	
-
